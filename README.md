@@ -8,6 +8,8 @@
 
 Set `banner` and `footer` properties to add banner and/or footer to your resulting css (so use after minifier). 
 
+Example:
+
 ```js
 postcss(require('postcss-banner')({banner: 'banner'}))
 ```
@@ -20,8 +22,10 @@ yields
 }
 ```
 
-Value will be converted to string and wrapped with spaces by default. Add `*` or `!` to avoid wrapping in spaces (and achieve nice multi-line comments for example).
-    
+Value will be converted to string and wrapped with spaces by default.
+Add `*` or `!` as a first symbol to avoid wrapping in spaces (and achieve nice multi-line comments for instance).
+
+Example:
     
 ```js
 postcss(require('postcss-banner')({banner: '*\n' +
