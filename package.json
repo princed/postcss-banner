@@ -16,7 +16,7 @@
     "url": "https://github.com/princed/postcss-banner.git"
   },
   "dependencies": {
-    "postcss": "^4.0.3"
+    "postcss": "4.1.16"
   },
   "devDependencies": {
     "chai": "1.10.0",
