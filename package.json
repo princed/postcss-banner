@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "chai": "1.10.0",
-    "gulp": "3.8.11",
+    "gulp": "3.9.0",
     "gulp-jshint": "1.11.2",
     "gulp-mocha": "2.0.0",
     "jshint-stylish": "1.0.0",
