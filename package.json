@@ -19,7 +19,7 @@
     "postcss": "4.1.16"
   },
   "devDependencies": {
-    "chai": "1.10.0",
+    "chai": "3.3.0",
     "gulp": "3.9.0",
     "gulp-jshint": "1.11.2",
     "gulp-mocha": "2.0.0",
