@@ -8,8 +8,8 @@ module.exports = function (opts) {
         var comment = postcss.comment({ text: text });
 
         if (text.indexOf('*') === 0 || text.indexOf('!') === 0) {
-            comment.left = '';
-            comment.right = '';
+            comment.raws.left = '';
+            comment.raws.right = '';
         }
 
         return comment;
@@ -21,13 +21,13 @@ module.exports = function (opts) {
 
             // New line after banner
             if (css.nodes[1]) {
-                css.nodes[1].before = '\n';
+                css.nodes[1].raws.before = '\n';
             }
         }
 
         if ('footer' in opts) {
             var footer = process(opts.footer);
-            footer.before = '\n';
+            footer.raws.before = '\n';
 
             css.append(footer);
         }
