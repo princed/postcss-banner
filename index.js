@@ -1,6 +1,6 @@
 var postcss = require('postcss');
 
-module.exports = function (opts) {
+module.exports = postcss.plugin('postcss-banner', function (opts) {
     opts = opts || {};
 
     function process(value) {
@@ -32,7 +32,4 @@ module.exports = function (opts) {
             css.append(footer);
         }
     };
-};
-module.exports.postcss = function (css) {
-    return module.exports()(css);
-};
+});
