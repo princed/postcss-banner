@@ -9,29 +9,26 @@ var testProcess = function (input, output, opts) {
 
 var input = 'a{ decl: value; }';
 
-var multilineText = '' +
-    '*\n' +
-    ' * multi\n' +
-    ' * line\n' +
-    ' * comment\n' +
-    ' ';
+var multilineText = ['multi',
+    'line',
+    'comment'
+  ].join('\n');
 
 var multilineResult = '' +
-    '/**\n' +
+    '/*!\n' +
     ' * multi\n' +
     ' * line\n' +
     ' * comment\n' +
-    ' */';
+    '*/';
 
 describe('postcss-banner', function () {
     describe('banner', function () {
         it('should add banner', function () {
-            testProcess(input, '/* LOL */\na{ decl: value; }', {banner: 'LOL'});
+            testProcess(input, '/*!\n * LOL\n*/\na{ decl: value; }', {banner: 'LOL'});
         });
 
-        it('should not add spaces with ! and * to banner', function () {
-            testProcess(input, '/*!LOL*/\na{ decl: value; }', {banner: '!LOL'});
-            testProcess(input, '/**LOL*/\na{ decl: value; }', {banner: '*LOL'});
+        it('should render the comment inline', function () {
+            testProcess(input, '/*! LOL */\na{ decl: value; }', {banner: 'LOL', inline: true});
         });
 
         it('should add multiline banner', function () {
@@ -41,12 +38,11 @@ describe('postcss-banner', function () {
 
     describe('footer', function () {
         it('should add footer', function () {
-            testProcess(input, 'a{ decl: value; }\n/* LOL */', {footer: 'LOL'});
+            testProcess(input, 'a{ decl: value; }\n/*!\n * LOL\n*/', {footer: 'LOL'});
         });
 
-        it('should not add spaces with ! and * to banner', function () {
-            testProcess(input, '/*!LOL*/\na{ decl: value; }', {banner: '!LOL'});
-            testProcess(input, '/**LOL*/\na{ decl: value; }', {banner: '*LOL'});
+        it('should add footer inline', function () {
+            testProcess(input, '/*! LOL */\na{ decl: value; }', {banner: 'LOL', inline: true});
         });
 
         it('should add multiline footer', function () {
@@ -56,11 +52,11 @@ describe('postcss-banner', function () {
 
     describe('both', function () {
         it('should add banner and footer', function () {
-            testProcess(input, '/* banner */\na{ decl: value; }\n/* footer */', {footer: 'footer', banner: 'banner'});
+            testProcess(input, '/*!\n * banner\n*/\na{ decl: value; }\n/*!\n * footer\n*/', {footer: 'footer', banner: 'banner'});
         });
 
         it('should convert values to string', function () {
-            testProcess(input, '/* undefined */\na{ decl: value; }\n/* undefined */', {banner: undefined, footer: undefined});
+            testProcess(input, '/*! undefined */\na{ decl: value; }\n/*! undefined */', {banner: undefined, footer: undefined, inline: true});
         });
 
         it('should ignore not set values', function () {

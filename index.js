@@ -5,12 +5,19 @@ module.exports = postcss.plugin('postcss-banner', function (opts) {
 
     function process(value) {
         var text = String(value);
-        var comment = postcss.comment({ text: text });
+        var comment = text;
 
-        if (text.indexOf('*') === 0 || text.indexOf('!') === 0) {
-            comment.raws.left = '';
-            comment.raws.right = '';
+        if (!opts.inline) {
+            comment = ['']
+                .concat(text.split('\n'))
+                .join('\n * ')
+                .concat('\n');
+        } else {
+          comment = [' ', comment, ' '].join('');
         }
+
+        comment = ['/*!', comment, '*/']
+            .join('');
 
         return comment;
     }
@@ -27,9 +34,8 @@ module.exports = postcss.plugin('postcss-banner', function (opts) {
 
         if ('footer' in opts) {
             var footer = process(opts.footer);
-            footer.raws.before = '\n';
-
             css.append(footer);
+            css.nodes[css.nodes.length - 1].before = '\n';
         }
     };
 });
