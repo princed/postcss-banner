@@ -4,6 +4,13 @@
 
 [PostCSS]: https://github.com/postcss/postcss
 
+## Migration from version 1.x
+
+* No spaces are added automatically
+* Multi-line mode is default
+* Asterisks in multi-line mode are added automatically
+* Use `inline` to turn off multi-line mode
+
 ## Usage
 
 Add PostCSS Banner to your build tool:
@@ -18,7 +25,7 @@ resulting css (so use after minifier).
 Example:
 
 ```js
-postcss(require('postcss-banner')({banner: 'banner'}))
+postcss(require('postcss-banner')({banner: '!\nbanner'}))
 ```
 
 yields
@@ -26,7 +33,7 @@ yields
 ```css
 /*!
  * banner
-*/
+ */
 .foo {
 }
 ```
@@ -40,7 +47,7 @@ Example:
 var postcss = require('gulp-postcss');
 var postcssBanner = require('postcss-banner');
 
-var banner = 'single line comment';
+var banner = ' single line comment ';
 
 gulp.task('css', function () {
   return gulp.src('./css/src/*.css')
@@ -58,7 +65,7 @@ gulp.task('css', function () {
 yields
 
 ```css
-/*! single line comment */
+/* single line comment */
 .foo {
 }
 ```

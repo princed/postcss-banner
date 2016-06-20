@@ -8,14 +8,12 @@ module.exports = postcss.plugin('postcss-banner', function configure(opts) {
     var comment = text;
 
     if (!opts.inline) {
-      comment = [''].concat(text.split('\n'))
+      comment = text.split('\n')
         .join('\n * ')
         .concat('\n ');
-    } else {
-      comment = [' ', comment, ' '].join('');
     }
 
-    comment = ['/*!', comment, '*/'].join('');
+    comment = ['/*', comment, '*/'].join('');
 
     return comment;
   }
