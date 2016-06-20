@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "no-var": ["off"],
+    "no-param-reassign": ["off"],
+    "vars-on-top": ["off"],
+    "prefer-arrow-callback": ["off"],
+    "prefer-template": ["off"],
+    "comma-dangle": ["error", "never"],
+    "object-curly-spacing": ["error", "never"]
+  }
+}

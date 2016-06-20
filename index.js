@@ -1,6 +1,6 @@
 var postcss = require('postcss');
 
-module.exports = postcss.plugin('postcss-banner', function (opts) {
+module.exports = postcss.plugin('postcss-banner', function configure(opts) {
   opts = opts || {};
 
   function process(value) {
@@ -8,10 +8,9 @@ module.exports = postcss.plugin('postcss-banner', function (opts) {
     var comment = text;
 
     if (!opts.inline) {
-      comment = [''].
-        concat(text.split('\n')).
-        join('\n * ').
-        concat('\n ');
+      comment = [''].concat(text.split('\n'))
+        .join('\n * ')
+        .concat('\n ');
     } else {
       comment = [' ', comment, ' '].join('');
     }
@@ -21,7 +20,7 @@ module.exports = postcss.plugin('postcss-banner', function (opts) {
     return comment;
   }
 
-  return function (css) {
+  return function andBanner(css) {
     if ('banner' in opts) {
       css.prepend(process(opts.banner));
 
