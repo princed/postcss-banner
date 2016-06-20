@@ -35,7 +35,7 @@ module.exports = postcss.plugin('postcss-banner', function (opts) {
         if ('footer' in opts) {
             var footer = process(opts.footer);
             css.append(footer);
-            css.nodes[css.nodes.length - 1].before = '\n';
+            css.nodes[css.nodes.length - 1].raws.before = '\n';
         }
     };
 });
