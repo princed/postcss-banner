@@ -19,12 +19,12 @@ var multilineResult = '' +
   ' * multi\n' +
   ' * line\n' +
   ' * comment\n' +
-  '*/';
+  ' */';
 
 describe('postcss-banner', function () {
   describe('banner', function () {
     it('should add banner', function () {
-      testProcess(input, '/*!\n * LOL\n*/\na{ decl: value; }', {banner: 'LOL'});
+      testProcess(input, '/*!\n * LOL\n */\na{ decl: value; }', {banner: 'LOL'});
     });
 
     it('should render the comment inline', function () {
@@ -38,7 +38,7 @@ describe('postcss-banner', function () {
 
   describe('footer', function () {
     it('should add footer', function () {
-      testProcess(input, 'a{ decl: value; }\n/*!\n * LOL\n*/', {footer: 'LOL'});
+      testProcess(input, 'a{ decl: value; }\n/*!\n * LOL\n */', {footer: 'LOL'});
     });
 
     it('should add footer inline', function () {
@@ -52,7 +52,7 @@ describe('postcss-banner', function () {
 
   describe('both', function () {
     it('should add banner and footer', function () {
-      testProcess(input, '/*!\n * banner\n*/\na{ decl: value; }\n/*!\n * footer\n*/', {
+      testProcess(input, '/*!\n * banner\n */\na{ decl: value; }\n/*!\n * footer\n */', {
         footer: 'footer',
         banner: 'banner'
       });

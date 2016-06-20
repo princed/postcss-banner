@@ -11,7 +11,7 @@ module.exports = postcss.plugin('postcss-banner', function (opts) {
       comment = [''].
         concat(text.split('\n')).
         join('\n * ').
-        concat('\n');
+        concat('\n ');
     } else {
       comment = [' ', comment, ' '].join('');
     }
