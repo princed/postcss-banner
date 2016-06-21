@@ -4,18 +4,21 @@ module.exports = postcss.plugin('postcss-banner', function configure(opts) {
   opts = opts || {};
 
   function process(value) {
-    var text = String(value);
-    var comment = text;
+    var comment = String(value);
+    var bang = opts.important ? '!' : '';
 
-    if (!opts.inline) {
-      comment = text.split('\n')
-        .join('\n * ')
-        .concat('\n ');
+    if (!!opts.inline) {
+      comment = ['',
+                  comment.split('\n').join(' '),
+                  ''
+                ].join(' ');
+    } else {
+      comment = [].concat('', comment.split('\n'))
+                  .join('\n * ')
+                  .concat('\n ');
     }
 
-    comment = ['/*', comment, '*/'].join('');
-
-    return comment;
+    return ['/*', bang, comment, '*/'].join('');
   }
 
   return function andBanner(css) {

@@ -6,10 +6,9 @@
 
 ## Migration from version 1.x
 
-* No spaces are added automatically
-* Multi-line mode is default
-* Asterisks in multi-line mode are added automatically
-* Use `inline` to turn off multi-line mode
+*   Multi-line mode is default
+*   Asterisks in multi-line mode are added automatically
+*   Use `inline` to turn off multi-line mode
 
 ## Usage
 
@@ -19,19 +18,19 @@ Add PostCSS Banner to your build tool:
 npm install --save-dev postcss-banner
 ```
 
-Set `banner` and `footer` properties to add banner and/or footer to your
+Set `banner` and/or `footer` properties to add banner and/or footer to your
 resulting css (so use after minifier).
 
 Example:
 
 ```js
-postcss(require('postcss-banner')({banner: '!\nbanner'}))
+postcss(require('postcss-banner')({banner: 'banner'}))
 ```
 
 yields
 
 ```css
-/*!
+/*
  * banner
  */
 .foo {
@@ -47,7 +46,7 @@ Example:
 var postcss = require('gulp-postcss');
 var postcssBanner = require('postcss-banner');
 
-var banner = ' single line comment ';
+var banner = 'single line comment';
 
 gulp.task('css', function () {
   return gulp.src('./css/src/*.css')
@@ -90,10 +89,27 @@ end of the css file.
 
 Type: `Boolean`
 
-Render the banner all in one line
+Default: `false`
+
+Render the banner all in one line.
+
+NOTE: If the string contains new line chars, the resulting comment will
+be automatically rendered inline.
+
+### `important`
+
+Type: `Boolean`
+
+Default: `false`
+
+Add a bang to the comment. (eg. `/*! banner v.0.0.1 */`)
+
+NOTE: Important css comments are generally preserved from being removed
+during a minification process.
 
 ## License
 
-[MIT License](https://github.com/princed/postcss-banner/blob/master/LICENSE) © Eugene Datsky
+[MIT License](https://github.com/princed/postcss-banner/blob/master/LICENSE)
+© Eugene Datsky
 
 See [PostCSS](http://postcss.org/) docs for examples for your environment.

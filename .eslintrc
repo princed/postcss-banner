@@ -4,12 +4,14 @@
     "node": true
   },
   "rules": {
-    "no-var": ["off"],
-    "no-param-reassign": ["off"],
-    "vars-on-top": ["off"],
-    "prefer-arrow-callback": ["off"],
-    "prefer-template": ["off"],
-    "comma-dangle": ["error", "never"],
-    "object-curly-spacing": ["error", "never"]
+    "no-var": 0,
+    "no-param-reassign": 0,
+    "vars-on-top": 0,
+    "prefer-arrow-callback": 0,
+    "prefer-template": 0,
+    "comma-dangle": 0,
+    "func-names": 0,
+    "object-curly-spacing": ["error", "never"],
+    "space-before-function-paren": [1, {"anonymous": "never", "named": "never"}]
   }
 }
