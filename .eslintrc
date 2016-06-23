@@ -11,7 +11,6 @@
     "prefer-template": 0,
     "comma-dangle": 0,
     "func-names": 0,
-    "object-curly-spacing": ["error", "never"],
-    "space-before-function-paren": [1, {"anonymous": "never", "named": "never"}]
+    "object-curly-spacing": ["error", "never"]
   }
 }
