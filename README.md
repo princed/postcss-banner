@@ -4,11 +4,10 @@
 
 [PostCSS]: https://github.com/postcss/postcss
 
-## Migration from version 1.x
+## Migration from previous versions
 
-*   Multi-line mode is default
-*   Asterisks in multi-line mode are added automatically
-*   Use `inline` to turn off multi-line mode
+* Asterisks to beginning of line are added automatically (use `inline: false` to disable)
+* Bang isn't added automatically (use `important: true` to enable)    
 
 ## Usage
 
