@@ -93,9 +93,6 @@ Default: `false`
 
 Render the banner all in one line.
 
-NOTE: If the string contains new line chars, the resulting comment will
-be automatically rendered inline.
-
 ### `important`
 
 Type: `Boolean`

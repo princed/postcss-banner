@@ -9,7 +9,7 @@ module.exports = postcss.plugin('postcss-banner', function configure(opts) {
 
     if (!!opts.inline) {
       comment = ['',
-                  comment.split('\n').join(' '),
+                  comment,
                   ''
                 ].join(' ');
     } else {
