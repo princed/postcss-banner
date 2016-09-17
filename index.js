@@ -7,7 +7,7 @@ module.exports = postcss.plugin('postcss-banner', function configure(opts) {
     var comment = String(value);
     var bang = opts.important ? '!' : '';
 
-    if (!!opts.inline) {
+    if (opts.inline) {
       comment = ['',
                   comment,
                   ''
