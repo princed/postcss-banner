@@ -1,4 +1,4 @@
-# PostCSS Banner [![Current version](https://img.shields.io/npm/v/postcss-banner.svg?style=flat-square)](https://www.npmjs.com/package/postcss-banner) [![Build Status](https://img.shields.io/travis/princed/postcss-banner.svg?style=flat-square)](https://travis-ci.org/princed/postcss-banner)
+# PostCSS Banner [![Dependency Status](https://img.shields.io/david/princed/postcss-banner.svg)](https://david-dm.org/princed/postcss-banner) [![Current version](https://img.shields.io/npm/v/postcss-banner.svg?style=flat-square)](https://www.npmjs.com/package/postcss-banner) [![NPM downloads](https://img.shields.io/npm/dt/postcss-banner.svg?style=flat-square)](https://www.npmjs.com/package/postcss-banner) [![Build Status](https://img.shields.io/travis/princed/postcss-banner.svg?style=flat-square)](https://travis-ci.org/princed/postcss-banner)
 
 [PostCSS] plugin to add text banner and footer to resulting file.
 
