@@ -9,13 +9,13 @@ module.exports = postcss.plugin('postcss-banner', function configure(opts) {
 
     if (opts.inline) {
       comment = ['',
-                  comment,
-                  ''
-                ].join(' ');
+        comment,
+        ''
+      ].join(' ');
     } else {
       comment = [].concat('', comment.split('\n'))
-                  .join('\n * ')
-                  .concat('\n ');
+        .join('\n * ')
+        .concat('\n ');
     }
 
     return ['/*', bang, comment, '*/'].join('');
