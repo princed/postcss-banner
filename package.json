@@ -19,7 +19,7 @@
     "postcss": "^6.0.0"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
+    "chai": "^4.1.0",
     "eslint": "^3.10.1",
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.1.0",
