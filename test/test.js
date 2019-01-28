@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 var postcss = require('postcss');
-var expect = require('chai').expect;
+var {expect} = require('chai');
 
 var plugin = require('../');
 
