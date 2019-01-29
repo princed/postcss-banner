@@ -1,6 +1,6 @@
 {
   "name": "postcss-banner",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "PostCSS plugin to add text banner to resulting file",
   "keywords": [
     "postcss",
