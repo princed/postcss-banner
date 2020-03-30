@@ -3,7 +3,7 @@
 var postcss = require('postcss');
 var {expect} = require('chai');
 
-var plugin = require('../');
+var plugin = require('..');
 
 var testProcess = function (input, output, opts) {
   expect(postcss(plugin(opts)).process(input).css).to.eql(output);
