@@ -1,102 +1,102 @@
 /* eslint-env mocha */
 
-var postcss = require('postcss');
-var {expect} = require('chai');
+const postcss = require('postcss');
+const { expect } = require('chai');
 
-var plugin = require('..');
+const plugin = require('..');
 
-var testProcess = function (input, output, opts) {
+function testProcess(input, output, opts) {
   expect(postcss(plugin(opts)).process(input).css).to.eql(output);
-};
+}
 
-var input = 'a{ decl: value; }';
+const input = 'a{ decl: value; }';
 
-var multilineText = [
+const multilineText = [
   'multi',
   'line',
-  'comment'
+  'comment',
 ].join('\n');
 
-var multilineResult = [
+const multilineResult = [
   '/*',
   ' * multi',
   ' * line',
   ' * comment',
-  ' */'
+  ' */',
 ].join('\n');
 
-var multilineBangResult = [
+const multilineBangResult = [
   '/*!',
   ' * multi',
   ' * line',
   ' * comment',
-  ' */'
+  ' */',
 ].join('\n');
 
-describe('postcss-banner', function () {
-  describe('banner', function () {
-    it('should add banner', function () {
+describe('postcss-banner', () => {
+  describe('banner', () => {
+    it('should add banner', () => {
       testProcess(input, '/*\n * LOL\n */\na{ decl: value; }',
-        {banner: 'LOL'});
+        { banner: 'LOL' });
     });
 
-    it('should render the comment inline', function () {
+    it('should render the comment inline', () => {
       testProcess(input, '/* LOL */\na{ decl: value; }',
-        {banner: 'LOL', inline: true});
+        { banner: 'LOL', inline: true });
     });
 
-    it('should add multiline banner', function () {
-      testProcess(input, multilineResult + '\na{ decl: value; }',
-        {banner: multilineText});
+    it('should add multiline banner', () => {
+      testProcess(input, `${multilineResult}\na{ decl: value; }`,
+        { banner: multilineText });
     });
   });
 
-  describe('footer', function () {
-    it('should add footer', function () {
+  describe('footer', () => {
+    it('should add footer', () => {
       testProcess(input, 'a{ decl: value; }\n/*\n * LOL\n */',
-        {footer: 'LOL'});
+        { footer: 'LOL' });
     });
 
-    it('should add footer inline', function () {
+    it('should add footer inline', () => {
       testProcess(input, '/* LOL */\na{ decl: value; }',
-        {banner: 'LOL', inline: true});
+        { banner: 'LOL', inline: true });
     });
 
-    it('should add multiline footer', function () {
-      testProcess(input, 'a{ decl: value; }\n' + multilineResult,
-        {footer: multilineText});
+    it('should add multiline footer', () => {
+      testProcess(input, `a{ decl: value; }\n${multilineResult}`,
+        { footer: multilineText });
     });
   });
 
-  describe('both', function () {
-    it('should add banner and footer', function () {
+  describe('both', () => {
+    it('should add banner and footer', () => {
       testProcess(input, '/*\n * banner\n */\na{ decl: value; }\n/*\n * footer\n */',
         {
           footer: 'footer',
-          banner: 'banner'
+          banner: 'banner',
         });
     });
 
-    it('should convert values to string', function () {
+    it('should convert values to string', () => {
       testProcess(input, '/* undefined */\na{ decl: value; }\n/* undefined */',
         {
           banner: undefined,
           footer: undefined,
-          inline: true
+          inline: true,
         });
     });
 
-    it('should add inline bang decorator', function () {
+    it('should add inline bang decorator', () => {
       testProcess(input, '/*! LOL */\na{ decl: value; }',
-        {banner: 'LOL', inline: true, important: true});
+        { banner: 'LOL', inline: true, important: true });
     });
 
-    it('should add multiline bang decorator', function () {
-      testProcess(input, multilineBangResult + '\na{ decl: value; }',
-        {banner: multilineText, important: true});
+    it('should add multiline bang decorator', () => {
+      testProcess(input, `${multilineBangResult}\na{ decl: value; }`,
+        { banner: multilineText, important: true });
     });
 
-    it('should ignore not set values', function () {
+    it('should ignore not set values', () => {
       testProcess(input, input, {});
     });
   });
