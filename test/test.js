@@ -9,91 +9,180 @@ function testProcess(input, output, opts) {
   expect(postcss(plugin(opts)).process(input).css).to.eql(output);
 }
 
-const input = 'a{ decl: value; }';
+function trim(strings, ...values) {
+  return []
+    .concat(...strings.map((s, i) => (values[i] ? [s, values[i]] : s)))
+    .join('')
+    .trim();
+}
 
-const multilineText = [
-  'multi',
-  'line',
-  'comment',
-].join('\n');
+const input = 'a { decl: value; }';
 
-const multilineResult = [
-  '/*',
-  ' * multi',
-  ' * line',
-  ' * comment',
-  ' */',
-].join('\n');
+const multilineText = trim`
+multi
+line
+comment
+`;
 
-const multilineBangResult = [
-  '/*!',
-  ' * multi',
-  ' * line',
-  ' * comment',
-  ' */',
-].join('\n');
+const multilineResult = trim`
+/*
+ * multi
+ * line
+ * comment
+ */
+`;
+
+const multilineBangResult = trim`
+/*!
+ * multi
+ * line
+ * comment
+ */
+`;
 
 describe('postcss-banner', () => {
   describe('banner', () => {
     it('should add banner', () => {
-      testProcess(input, '/*\n * LOL\n */\na{ decl: value; }',
-        { banner: 'LOL' });
+      testProcess(
+        input,
+        trim`
+/*
+ * LOL
+ */
+a { decl: value; }
+`,
+        { banner: 'LOL' },
+      );
     });
 
     it('should render the comment inline', () => {
-      testProcess(input, '/* LOL */\na{ decl: value; }',
-        { banner: 'LOL', inline: true });
+      testProcess(
+        input,
+        trim`
+/* LOL */
+a { decl: value; }
+`,
+        { banner: 'LOL', inline: true },
+      );
     });
 
     it('should add multiline banner', () => {
-      testProcess(input, `${multilineResult}\na{ decl: value; }`,
-        { banner: multilineText });
+      testProcess(
+        input,
+        trim`
+${multilineResult}
+a { decl: value; }
+`,
+        { banner: multilineText },
+      );
     });
   });
 
   describe('footer', () => {
     it('should add footer', () => {
-      testProcess(input, 'a{ decl: value; }\n/*\n * LOL\n */',
-        { footer: 'LOL' });
+      testProcess(
+        input,
+        trim`
+a { decl: value; }
+/*
+ * LOL
+ */
+`,
+        { footer: 'LOL' },
+      );
     });
 
     it('should add footer inline', () => {
-      testProcess(input, '/* LOL */\na{ decl: value; }',
-        { banner: 'LOL', inline: true });
+      testProcess(
+        input,
+        trim`
+/* LOL */
+a { decl: value; }
+`,
+        {
+          banner: 'LOL',
+          inline: true,
+        },
+      );
     });
 
     it('should add multiline footer', () => {
-      testProcess(input, `a{ decl: value; }\n${multilineResult}`,
-        { footer: multilineText });
+      testProcess(
+        input,
+        trim`
+a { decl: value; }
+${multilineResult}
+`,
+        {
+          footer: multilineText,
+        },
+      );
     });
   });
 
   describe('both', () => {
     it('should add banner and footer', () => {
-      testProcess(input, '/*\n * banner\n */\na{ decl: value; }\n/*\n * footer\n */',
+      testProcess(
+        input,
+        trim`
+/*
+ * banner
+ */
+a { decl: value; }
+/*
+ * footer
+ */
+`,
         {
           footer: 'footer',
           banner: 'banner',
-        });
+        },
+      );
     });
 
     it('should convert values to string', () => {
-      testProcess(input, '/* undefined */\na{ decl: value; }\n/* undefined */',
+      testProcess(
+        input,
+        trim`
+/* undefined */
+a { decl: value; }
+/* undefined */
+`,
         {
           banner: undefined,
           footer: undefined,
           inline: true,
-        });
+        },
+      );
     });
 
     it('should add inline bang decorator', () => {
-      testProcess(input, '/*! LOL */\na{ decl: value; }',
-        { banner: 'LOL', inline: true, important: true });
+      testProcess(
+        input,
+        trim`
+/*! LOL */
+a { decl: value; }
+`,
+        {
+          banner: 'LOL',
+          inline: true,
+          important: true,
+        },
+      );
     });
 
     it('should add multiline bang decorator', () => {
-      testProcess(input, `${multilineBangResult}\na{ decl: value; }`,
-        { banner: multilineText, important: true });
+      testProcess(
+        input,
+        trim`
+${multilineBangResult}
+a { decl: value; }
+`,
+        {
+          banner: multilineText,
+          important: true,
+        },
+      );
     });
 
     it('should ignore not set values', () => {
