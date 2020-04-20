@@ -1,27 +1,20 @@
 const postcss = require('postcss');
 
 module.exports = postcss.plugin('postcss-banner', (opts = {}) => {
-  function process(value) {
-    let comment = String(value);
+  function makeComment(banner) {
     const bang = opts.important ? '!' : '';
 
     if (opts.inline) {
-      comment = ['',
-        comment,
-        '',
-      ].join(' ');
-    } else {
-      comment = [].concat('', comment.split('\n'))
-        .join('\n * ')
-        .concat('\n ');
+      return `/*${bang} ${banner} */`;
     }
-
-    return ['/*', bang, comment, '*/'].join('');
+    return `/*${bang}
+${banner.replace(/^|\n/g, '$& * ')}
+ */`;
   }
 
   return function andBanner(css) {
     if ('banner' in opts) {
-      css.prepend(process(opts.banner));
+      css.prepend(makeComment(opts.banner));
 
       // New line after banner
       if (css.nodes[1]) {
@@ -31,8 +24,7 @@ module.exports = postcss.plugin('postcss-banner', (opts = {}) => {
     }
 
     if ('footer' in opts) {
-      const footer = process(opts.footer);
-      css.append(footer);
+      css.append(makeComment(opts.footer));
       // eslint-disable-next-line no-param-reassign
       css.nodes[css.nodes.length - 1].raws.before = '\n';
     }
