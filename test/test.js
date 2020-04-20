@@ -10,8 +10,8 @@ function testProcess(input, output, opts) {
 }
 
 function trim(strings, ...values) {
-  return []
-    .concat(...strings.map((s, i) => (values[i] ? [s, values[i]] : s)))
+  return strings
+    .map((s, i) => (values[i] ? `${s}${values[i]}` : s))
     .join('')
     .trim();
 }
