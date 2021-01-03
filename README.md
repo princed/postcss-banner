@@ -14,7 +14,7 @@
 Add PostCSS Banner to your build tool:
 
 ```sh
-npm install --save-dev postcss-banner
+npm install --save-dev postcss postcss-banner
 ```
 
 Set `banner` and/or `footer` properties to add banner and/or footer to your
